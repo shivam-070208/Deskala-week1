@@ -1,5 +1,4 @@
-//* https://leetcode.com/problems/move-zeroes/description/
-
+//* https://leetcode.com/problems/two-sum/description/
 /*
 This solution efficiently solves the Two Sum problem using a hash map (implemented here via JavaScript's Map).
 Here's how it works:
@@ -12,7 +11,7 @@ This approach ensures each number is processed at most twice, resulting in an ef
 /*
 * Time Complexity:
 * Best Case: O(1) - if the answer is found at the very first iteration.
-* Worst Case: O(n) - if the answer is at the end of the array or does not exist.
+! Worst Case: O(n) - if the answer is at the end of the array or does not exist.
 * Average Case: O(n) - since we might need to traverse most of the array on average.
 * Space Complexity: O(n) - due to the auxiliary hash map.
 */
