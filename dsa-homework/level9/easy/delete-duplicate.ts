@@ -1,11 +1,4 @@
-export class ListNode {
-    val: number
-    next: ListNode | null
-    constructor(val?: number, next?: ListNode | null) {
-        this.val = (val === undefined ? 0 : val)
-        this.next = (next === undefined ? null : next)
-    }
-}
+
 //* https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/
 /*
  * This function removes duplicates from a sorted singly linked list.
@@ -21,6 +14,8 @@ export class ListNode {
  * Space Complexity:
  * O(1) - The operation is done in-place using constant extra space.
  */
+
+import { ListNode } from "../types/list-node.ts";
 
 
 function deleteDuplicates(head: ListNode | null): ListNode | null {
