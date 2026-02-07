@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "declaration": true,
+    "esModuleInterop":true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+
+}
