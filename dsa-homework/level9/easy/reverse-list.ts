@@ -1,4 +1,11 @@
-import { ListNode } from "../types/list-node";
+export class ListNode {
+    val: number
+    next: ListNode | null
+    constructor(val?: number, next?: ListNode | null) {
+        this.val = (val === undefined ? 0 : val)
+        this.next = (next === undefined ? null : next)
+    }
+}
 //* https://leetcode.com/problems/reverse-linked-list/
 /*
  * This function reverses a singly linked list.
