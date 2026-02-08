@@ -1,31 +1,37 @@
-//*https://leetcode.com/problems/reverse-string/
+//* https://leetcode.com/problems/reverse-string/
 /*
-/*
-* This function solves the "Reverse String" problem by reversing the characters of the input string array in place.
-- It uses two pointers, starting at the leftmost and rightmost indices, and swaps the elements at these pointers while moving them towards the center.
-- The operation is performed in-place and does not allocate extra space for another array.
-
+* This function solves the "Reverse String" problem by reversing the characters
+* of the input string array in place using two pointers.
+* The function swaps characters from the ends towards the center without extra space.
+*
 * Example:
-Input: s = ["a","b","c","d","e"]
-After reverse: s = ["e","d","c","b","a"]
-
-* Time Complexity:
-* O(n) - Each character is visited at most once (half are swapped with the other half).
-* Space Complexity:
-* O(1) - No extra space is allocated; only a few variables are used for swapping.
+* Input:  s = ["a","b","c","d","e"]
+* Output: s = ["e","d","c","b","a"]
 */
 
 function reverseString(s: string[]): void {
-    let left =0;
-    let right =s.length-1;
-    while(left<right){
-        const temp =s[right];
-        s[right] =s[left];
-        s[left]=temp;
+    let left = 0;
+    let right = s.length - 1;
+
+    while (left < right) {
+        const temp = s[left];
+        s[left] = s[right];
+        s[right] = temp;
         left++;
         right--;
-    } 
-};
-const string =["a","b","c","d","e"]
-reverseString(string)
-console.log(string)
+    }
+}
+
+const string = ["a", "b", "c", "d", "e"];
+reverseString(string);
+console.log(string);
+
+/*
+ * Time Complexity:
+ * Best:    O(1)      - If the array is empty or has a single element.
+ * Average: O(n)      - Each index pair is swapped once moving towards center.
+ * Worst:   O(n)      - All pairs from front and back are swapped (n/2 swaps).
+ *
+ * Space Complexity:
+ * O(1) - Only a constant amount of extra space is used (for temp and indices).
+ */

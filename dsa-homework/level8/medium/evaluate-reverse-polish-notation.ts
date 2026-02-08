@@ -8,11 +8,6 @@
  * Input: tokens = ["2", "1", "+", "3", "*"]
  * Output: 9
  * Explanation: ((2 + 1) * 3) = 9
- *
- * Time Complexity:
- * O(n) - Each token is processed once.
- * Space Complexity:
- * O(n) - Stack may hold up to n/2 numbers in the worst case.
  */
 function evalRPN(tokens: string[]): number {
     const stack :number[] = [];
@@ -42,10 +37,19 @@ function evalRPN(tokens: string[]): number {
                 break;
             default:
                 stack.push(Number(token))
-
         }
     }
     return stack.pop()!;
 };
 
 console.log(evalRPN(["10","6","9","3","+","-11","*","/","*","17","+"]));
+
+/*
+ * Time Complexity:
+ * Best:    O(1)      - If the input has only a single number.
+ * Average: O(n)      - Each token is processed once, n = tokens.length.
+ * Worst:   O(n)      - Each token is processed once, n = tokens.length.
+ *
+ * Space Complexity:
+ * O(n) - Stack may hold up to about n/2 numbers in the worst case (so, O(n)).
+ */

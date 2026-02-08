@@ -8,12 +8,6 @@
  * Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
  * Output: 6
  * Explanation: The above elevation map can trap 6 units of water.
- *
- * Time Complexity:
- * O(n) - The algorithm traverses the elevation array at most twice using the two-pointer technique.
- *
- * Space Complexity:
- * O(1) - Only a constant number of variables are used.
  */
 
 function trap(height: number[]): number {
@@ -46,3 +40,13 @@ function trap(height: number[]): number {
 
 const elevationMap = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
 console.log(trap(elevationMap));
+
+/*
+ * Time Complexity:
+ * Best:    O(1)      - If the array contains less than 2 elements, no water can be trapped.
+ * Average: O(n)      - Traverses the elevation map once using the two-pointer technique.
+ * Worst:   O(n)      - Traverses the elevation map entirely even for degenerate or challenging layouts.
+ *
+ * Space Complexity:
+ * O(1) - Only a constant amount of extra space is used (left, right, leftMax, rightMax, waterTrapped).
+ */

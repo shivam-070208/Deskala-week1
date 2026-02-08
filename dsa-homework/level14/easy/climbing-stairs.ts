@@ -12,25 +12,28 @@
  * 1. 1 step + 1 step + 1 step
  * 2. 1 step + 2 steps
  * 3. 2 steps + 1 step
- *
- * Time Complexity:
- * O(n) - We compute the result in a single pass from 2 to n.
- *
- * Space Complexity:
- * O(1) - The algorithm uses only a fixed number of variables (not proportional to n), so space usage is constant.
  */
 function climbStairs(n: number): number {
-    const stack:number[] =[0];
-    for(let i=1;i<=n;i++){
-      let l1 =stack.pop()!;
-      if(i==1 || i==2){
-          stack.push(l1,l1+1);
-      }
-      else {
-          let l2 = stack.pop()!;
-          stack.push(l1,l1+l2)
-      }
+    if (n === 0 || n === 1) return 1;
+    if (n === 2) return 2;            
+
+    let first = 1; 
+    let second = 2;
+
+    
+    for (let i = 3; i <= n; i++) {
+        const temp = first + second;
+        first = second;
+        second = temp;
     }
-    return stack.pop()!;
-};
+    return second;
+}
 console.log(climbStairs(10));
+
+/*
+ ? Time Complexity:
+ * Time (Best):    O(n)
+ * Time (Worst):   O(n)
+ * Time (Average): O(n)
+ ? Space Complexity:   O(1)
+ */

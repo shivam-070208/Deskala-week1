@@ -8,13 +8,6 @@ Here's how it works:
 4. Otherwise, it records the current number and its index in the map for future lookups.
 This approach ensures each number is processed at most twice, resulting in an efficient O(n) time complexity.
 */
-/*
-* Time Complexity:
-* Best Case: O(1) - if the answer is found at the very first iteration.
-! Worst Case: O(n) - if the answer is at the end of the array or does not exist.
-* Average Case: O(n) - since we might need to traverse most of the array on average.
-* Space Complexity: O(n) - due to the auxiliary hash map.
-*/
 
 function twoSum(nums: number[], target: number): number[] {
     const numToIndex = new Map<number, number>();
@@ -29,5 +22,14 @@ function twoSum(nums: number[], target: number): number[] {
     return [-1, -1];
 };
 
-
 console.log(twoSum([2,7,11,15],9))
+
+/*
+ * Time Complexity:
+ * Best:    O(1)      - If a solution is found at the very beginning.
+ * Average: O(n)      - Typically need to traverse most of the array to find a pair.
+ * Worst:   O(n)      - Have to check all elements, such as when the answer is at the end or doesn't exist.
+ *
+ * Space Complexity:
+ * O(n) - Uses a hash map to store up to n elements.
+ */

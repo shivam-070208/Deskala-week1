@@ -8,9 +8,6 @@
 * Example:
 Input: nums = [1,1,2]
 After: nums = [1,2], returns 2
-
-* Time Complexity: O(n^2) in the worst case, since splice is called for every duplicate.
-* Space Complexity: O(1), as the operation is performed in-place.
 */
 function removeDuplicates(nums: number[]): number {
     let prev:number|undefined;
@@ -26,3 +23,13 @@ function removeDuplicates(nums: number[]): number {
 
 const numsInput = [1,1,2]
 console.log(numsInput,removeDuplicates(numsInput))
+
+/*
+ * Time Complexity:
+ * Best:    O(n)     - If no duplicates exist (or only a few at the start), each element is checked once, and few splices happen.
+ * Average: O(n^2)   - On average, splice is called for repeated consecutive duplicates, shifting elements each time.
+ * Worst:   O(n^2)   - If every number is duplicated (e.g., [1,1,1...]), each splice causes all elements after to be shifted left.
+ *
+ * Space Complexity:
+ * O(1) - No extra array or data structure used; operation done in place.
+ */

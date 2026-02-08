@@ -7,25 +7,29 @@
  * Example:
  * Input: word1 = "abc", word2 = "pqr"
  * Output: "apbqcr"
- *
- * Time Complexity:
- * O(n + m), where n and m are the lengths of the two input strings.
- * Each character from both strings is processed exactly once.
- *
- * Space Complexity:
- * O(n + m) - The result string's length will be n + m in the worst case.
  */
-function mergeAlternately(word1: string, word2: string): string {
-    let l1:number = word1.length;
-    let l2:number = word2.length;
 
-    let minLength:number = Math.min(l1,l2);
+function mergeAlternately(word1: string, word2: string): string {
+    let l1: number = word1.length;
+    let l2: number = word2.length;
+
+    let minLength: number = Math.min(l1, l2);
     let resultString = "";
-    for(let i = 0; i<minLength;i++){
-        resultString+=word1[i]+word2[i];
+    for (let i = 0; i < minLength; i++) {
+        resultString += word1[i] + word2[i];
     }
-    resultString+=l1>l2?word1.slice(l2,l1):word2.slice(l1,l2);
+    resultString += l1 > l2 ? word1.slice(l2, l1) : word2.slice(l1, l2);
     return resultString;
 };
 
-console.log(mergeAlternately("abc","pqr"))
+console.log(mergeAlternately("abc", "pqr"))
+
+/*
+ * Time Complexity:
+ * Best:    O(1)       - If both strings are empty.
+ * Average: O(n + m)   - Each character from both strings is processed exactly once.
+ * Worst:   O(n + m)   - All characters from both strings are processed and appended.
+ *
+ * Space Complexity:
+ * O(n + m) - Only the result string of length up to n + m is created.
+ */

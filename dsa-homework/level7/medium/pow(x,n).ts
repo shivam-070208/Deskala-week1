@@ -7,15 +7,8 @@
  * Input: x = 2, n = 10
  * Output: 1024
  * Explanation: 2^10 = 1024
- *
- * Time Complexity:
- * O(log n) - The algorithm uses a logarithmic number of operations to compute the power.
- * Best Case: O(1) - If n is 0, the function returns 1 immediately.
- * Worst Case: O(log n) - If n is a large positive or negative number, the algorithm performs a logarithmic number of operations.
- * Average Case: O(log n) - In most cases, the algorithm performs a logarithmic number of operations.
- * Space Complexity:
- * O(1) - The algorithm uses only a constant amount of space.
  */
+
 function myPow(x: number, n: number): number {
     if (n === 1) {
         return x;
@@ -47,3 +40,15 @@ function myPow(x: number, n: number): number {
     return pow;
 };
 console.log(myPow(2, 10));
+
+/*
+ * Time Complexity:
+ * Best:    O(1)      - If n is 0, the function immediately returns 1.
+ * Average: O(log n)  - For most values of n, the function performs logarithmic steps.
+ * Worst:   O(log n)  - For large n, the function performs a logarithmic number of operations.
+ *
+ * Space Complexity:
+ * Best:    O(1)
+ * Average: O(1)
+ * Worst:   O(1)
+ */

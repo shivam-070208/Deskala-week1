@@ -8,27 +8,33 @@
  * Input: height = [1,8,6,2,5,4,8,3,7]
  * Output: 49
  * Explanation: The maximum area (water that can be held) is produced by the lines at index 1 and 8.
- *
- * Time Complexity:
- * O(n) - The algorithm examines each line at most once using the two-pointer technique.
- *
- * Space Complexity:
- * O(1) - Only a constant number of variables are used.
  */
 
 function maxArea(height: number[]): number {
-    let MAX_AREA = 0;
-    let lp = 0;
-    let lr = height.length-1;
-    while(lp<lr){
-        const hl = height[lp];
-        const hr = height[lr];
-        const area = (lr-lp)*Math.min(hl,hr);
-        if(area>MAX_AREA) MAX_AREA=area;
-        if(hl<hr) lp++;
-        else lr--;
-        
+    let maxArea = 0;
+    let left = 0;
+    let right = height.length - 1;
+    while (left < right) {
+        const h = Math.min(height[left], height[right]);
+        const w = right - left;
+        maxArea = Math.max(maxArea, h * w);
+        if (height[left] < height[right]) {
+            left++;
+        } else {
+            right--;
+        }
     }
-    return MAX_AREA;
-};
+    return maxArea;
+}
+
 maxArea([1,8,6,2,5,4,8,3,7]);
+
+/*
+ * Time Complexity:
+ * Best:    O(1)      - If the array has fewer than 2 lines, at most one computation is done.
+ * Average: O(n)      - Both pointers traverse the array from opposite ends, visiting each element at most once.
+ * Worst:   O(n)      - In all practical scenarios, every element is considered as one of the sides.
+ *
+ * Space Complexity:
+ * O(1) - Only a constant amount of extra space is used (pointers and maxArea variable).
+ */

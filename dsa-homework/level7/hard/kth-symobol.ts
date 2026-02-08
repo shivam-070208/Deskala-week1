@@ -14,18 +14,20 @@
  * Input: n = 4, k = 5
  * Output: 1
  * Explanation: In row 4, the sequence is 01101001, and the 5th symbol is 1.
- *
- * Time Complexity:
- * Best Case: O(1) - When n = 1, the function returns immediately.
- * Worst Case: O(n) - The deepest recursion occurs for general n, leading to stack depth of n.
- * Average Case: O(n) - The average depth of recursion is proportional to n.
- * Space Complexity:
- * O(n) - Stack space due to recursion.
  */
-
 
 function kthGrammar(n: number, k: number): number {
     if (n === 1) return 0;
     const parent = kthGrammar(n - 1, Math.ceil(k / 2));
     return k % 2 === 1 ? parent : parent ^ 1;
 }
+
+/*
+ * Time Complexity:
+ * Best:    O(1)     - When n = 1, returns immediately.
+ * Average: O(n)     - Average recursion depth is proportional to n.
+ * Worst:   O(n)     - Stack depth and recursive calls up to n.
+ *
+ * Space Complexity:
+ * O(n) - Stack space due to recursion.
+ */
