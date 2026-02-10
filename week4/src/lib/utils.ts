@@ -1,16 +1,15 @@
-import { ACCESS_TOKEN_EXPIRY_TIME, REFRESH_TOKEN_EXPIRY_TIME } from "@/config/contants";
 import { cookieOptions } from "@/config/cookie";
-import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "@/config/env.config";
+import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET, ACCESS_TOKEN_EXPIRES_IN, REFRESH_TOKEN_EXPIRES_IN } from "@/config/env.config";
 import { Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import jwt  from "jsonwebtoken";
 
 interface TokenPayload {
     userId: string;
     email: string;
 }
 
-export enum AuthToken{
-    REFRESH_TOKEN ="refresh_token",
+export enum AuthToken {
+    REFRESH_TOKEN = "refresh_token",
     ACCESS_TOKEN = "access_token"
 }
 
@@ -21,7 +20,7 @@ export const generateRefreshToken = (userId: string, email: string): string => {
     };
 
     return jwt.sign(payload, REFRESH_TOKEN_SECRET, {
-        expiresIn: REFRESH_TOKEN_EXPIRY_TIME
+        expiresIn: REFRESH_TOKEN_EXPIRES_IN
     });
 };
 
@@ -31,9 +30,8 @@ export const generateAccessTOken = (userId: string, email: string): string => {
         userId,
         email
     };
-
-    return jwt.sign(payload, ACCESS_TOKEN_SECRET, {
-        expiresIn: ACCESS_TOKEN_EXPIRY_TIME
+    return jwt.sign(payload, ACCESS_TOKEN_SECRET as jwt.Secret, {
+        expiresIn: ACCESS_TOKEN_EXPIRES_IN 
     });
 };
 
