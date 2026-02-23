@@ -1,18 +1,24 @@
 import { Task, TaskStatus } from "@/api/models/task.model";
 
 type TaskServiceError = { message: string; code: string; status: number };
+type TaskServiceResult<T> =
+  | { data: T; err: null }
+  | { data: null; err: TaskServiceError };
 
 export class TaskService {
   // Get all tasks
-  async getAll(userId:string): Promise<{ tasks: InstanceType<typeof Task>[] | null; err: TaskServiceError | null }> {
+  async getAll(
+    userId: string,
+  ): Promise<TaskServiceResult<InstanceType<typeof Task>[]>> {
     try {
-      const tasks = await Task.find({userId}).exec();
-      return { tasks, err: null };
-    } catch (error: any) {
+      const tasks = await Task.find({ userId }).exec();
+      return { data: tasks, err: null };
+    } catch (err: any) {
       return {
-        tasks: null,
+        data: null,
         err: {
-          message: "Error fetching tasks: " + (error?.message || "Unknown error"),
+          message:
+            "Error fetching tasks: " + (err?.message || "Unknown error"),
           code: "GET_TASKS_ERROR",
           status: 500,
         },
@@ -21,15 +27,18 @@ export class TaskService {
   }
 
   // Get a task by id
-  async getById(id: string,userId:string): Promise<{ task: InstanceType<typeof Task> | null; err: TaskServiceError | null }> {
+  async getById(
+    id: string,
+    userId: string,
+  ): Promise<TaskServiceResult<InstanceType<typeof Task>>> {
     try {
       const task = await Task.findOne({
-        _id:id ,
-        userId
+        _id: id,
+        userId,
       }).exec();
       if (!task) {
         return {
-          task: null,
+          data: null,
           err: {
             message: "Task not found.",
             code: "TASK_NOT_FOUND",
@@ -37,12 +46,13 @@ export class TaskService {
           },
         };
       }
-      return { task, err: null };
+      return { data: task, err: null };
     } catch (error: any) {
       return {
-        task: null,
+        data: null,
         err: {
-          message: "Error fetching task: " + (error?.message || "Unknown error"),
+          message:
+            "Error fetching task: " + (error?.message || "Unknown error"),
           code: "GET_TASK_ERROR",
           status: 500,
         },
@@ -51,7 +61,12 @@ export class TaskService {
   }
 
   // Add a new task
-  async add(task: { title: string; description: string; status?: TaskStatus; userId: string }): Promise<{ task: InstanceType<typeof Task> | null; err: TaskServiceError | null }> {
+  async add(task: {
+    title: string;
+    description: string;
+    status?: TaskStatus;
+    userId: string;
+  }): Promise<TaskServiceResult<InstanceType<typeof Task>>> {
     try {
       const newTask = new Task({
         ...task,
@@ -60,12 +75,13 @@ export class TaskService {
       });
 
       await newTask.save();
-      return { task: newTask, err: null };
+      return { data: newTask, err: null };
     } catch (error: any) {
       return {
-        task: null,
+        data: null,
         err: {
-          message: "Error creating task: " + (error?.message || "Unknown error"),
+          message:
+            "Error creating task: " + (error?.message || "Unknown error"),
           code: "CREATE_TASK_ERROR",
           status: 500,
         },
@@ -76,14 +92,16 @@ export class TaskService {
   // Update a task by id
   async update(
     id: string,
-    userId:string,
-    update: Partial<{ title: string; description: string; status: TaskStatus }>
-  ): Promise<{ task: InstanceType<typeof Task> | null; err: TaskServiceError | null }> {
+    userId: string,
+    update: Partial<{ title: string; description: string; status: TaskStatus }>,
+  ): Promise<TaskServiceResult<InstanceType<typeof Task>>> {
     try {
-      const task = await Task.findOneAndUpdate({_id:id,userId}, update, { new: true }).exec();
+      const task = await Task.findOneAndUpdate({ _id: id, userId }, update, {
+        new: true,
+      }).exec();
       if (!task) {
         return {
-          task: null,
+          data: null,
           err: {
             message: "Task not found.",
             code: "TASK_NOT_FOUND",
@@ -91,12 +109,13 @@ export class TaskService {
           },
         };
       }
-      return { task, err: null };
+      return { data: task, err: null };
     } catch (error: any) {
       return {
-        task: null,
+        data: null,
         err: {
-          message: "Error updating task: " + (error?.message || "Unknown error"),
+          message:
+            "Error updating task: " + (error?.message || "Unknown error"),
           code: "UPDATE_TASK_ERROR",
           status: 500,
         },
@@ -105,14 +124,17 @@ export class TaskService {
   }
 
   // Remove/delete a task by id
-  async remove(id: string,userId:string): Promise<{ success: boolean; err: TaskServiceError | null }> {
+  async remove(
+    id: string,
+    userId: string,
+  ): Promise<TaskServiceResult<boolean>> {
     try {
-      const result = await Task.deleteOne({ _id:id,userId }).exec();
+      const result = await Task.deleteOne({ _id: id, userId }).exec();
       if (result.deletedCount === 1) {
-        return { success: true, err: null };
+        return { data: true, err: null };
       } else {
         return {
-          success: false,
+          data: null,
           err: {
             message: "Task not found.",
             code: "TASK_NOT_FOUND",
@@ -122,9 +144,10 @@ export class TaskService {
       }
     } catch (error: any) {
       return {
-        success: false,
+        data: null,
         err: {
-          message: "Error deleting task: " + (error?.message || "Unknown error"),
+          message:
+            "Error deleting task: " + (error?.message || "Unknown error"),
           code: "DELETE_TASK_ERROR",
           status: 500,
         },

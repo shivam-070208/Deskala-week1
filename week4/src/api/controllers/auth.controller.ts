@@ -9,8 +9,6 @@ import {
     setToken,
     AuthToken
 } from "@/lib/utils";
-import { User } from "@/api/models/user.model";
-
 
 
 
@@ -26,8 +24,8 @@ const registerController = asyncHandler(async (req: Request, res: Response) => {
     }
     const {user,err} = await userService.createNewUser(name, email, password);
 
-    if ( err !==null){
-        return res.status(err.status).json({...err})
+    if ( err !==null ){
+        return res.status(err.status ||404).json({...err})
     }
     const accessToken = generateAccessTOken(user._id.toString(), user.email);
     const refreshToken = generateRefreshToken(user._id.toString(), user.email);
@@ -54,8 +52,8 @@ const loginController = asyncHandler(async (req: Request, res: Response) => {
 
     const { user, err } = await userService.getUserByEmail(email);
 
-    if (err || !user) {
-        return res.status(err.status).json({ ...err });
+    if (err !=null) {
+        return res.status(err.status||404).json({ ...err });
     }
 
     const isValid = await passwordValidator(password, user.password);
