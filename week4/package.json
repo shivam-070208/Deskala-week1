@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/src/server.js",
-  "type": "bundler",
   "scripts": {
-    "dev": "tsx watch  src/server.ts",
+    "dev": "tsx watch  ./src/server.ts",
     "build": "tsc",
-    "start": "node dist/src/server.js"
+    "start": "tsx ./dist/server.js"
   },
   "keywords": [],
   "author": "",

@@ -32,6 +32,9 @@ const getTasksController = asyncHandler(async (req: Request, res: Response) => {
 
 const getTaskByIdController = asyncHandler(async (req: Request, res: Response) => {
     const taskId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+
+    if(!taskId)
+        return res.status(400).json({message : "task id must be provided"})
     const {userId} = (req as ExtendedRequest).user!
     const { data:task, err } = await taskService.getById(taskId,userId);
     if (err !== null) {
@@ -45,6 +48,9 @@ const updateTaskController = asyncHandler(async (req: Request, res: Response) =>
     const taskId = Array.isArray(id) ? id[0] : id;
     const {userId} = (req as ExtendedRequest).user!;
     const { title, description, status } = req.body;
+
+    if(!taskId)
+            return res.status(400).json({message : "task id must be provided"})
     if (status && !Object.values(TaskStatus).includes((status).toLowerCase())) {
         return res.status(400).json({ message: "Invalid status value. Must be 'pending' or 'completed'." });
     }
@@ -59,7 +65,8 @@ const updateTaskController = asyncHandler(async (req: Request, res: Response) =>
 const deleteTaskController = asyncHandler(async (req: Request, res: Response) => {
     const taskId = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
     const {userId} = (req as ExtendedRequest).user!;
-
+    if(!taskId)
+        return res.status(400).json({message : "task id must be provided"})
     const {  err } = await taskService.remove(taskId ,userId);
     if (err !== null) {
         return res.status(err.status).json({ ...err });

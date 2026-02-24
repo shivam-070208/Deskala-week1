@@ -8,9 +8,9 @@ import { PORT } from "@/config/env.config";
 
 
 connectDb()
-    .then(()=>{
-        app.listen(PORT,(err)=>{
-            if(err){
+    .then(() => {
+        app.listen(PORT, (err) => {
+            if (err) {
                 console.log(err.message)
                 process.exit(0)
             }

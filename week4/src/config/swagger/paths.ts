@@ -1,7 +1,3 @@
-/**
- * Swagger Paths Definitions
- * Centralized endpoint documentation organized by resource
- */
 
 export const paths = {
   // ==================== AUTH PATHS ====================

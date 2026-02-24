@@ -9,7 +9,7 @@ interface TokenPayload {
 }
 
 export enum AuthToken {
-    REFRESH_TOKEN = "refresh_token",
+    REFRESH_TOKEN = "token",
     ACCESS_TOKEN = "access_token"
 }
 

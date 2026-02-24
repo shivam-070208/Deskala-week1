@@ -2,14 +2,19 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Default",
   "compilerOptions": {
-    "rootDir": "./",
+    "baseUrl": ".",
+    "rootDir": "./src",
     "outDir": "./dist",
-    "moduleResolution": "node",
-    "declaration": true,
-    "esModuleInterop":true,
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
-
+      "@/*": ["./src/*"],
+    },
+    "esModuleInterop": true,
+    "incremental": true,
+    "lib": ["es2022", "DOM", "DOM.Iterable"],
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
+    "target": "ES2022"
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
